@@ -1,11 +1,18 @@
 require 'RMagick'
 include Magick
 
+# 9 totally unchanging diangonal rows
+# 7 rows of transition 
+# 9 totally unchanging horizontal rows
+
 
 # These constants will actually Do The Art
 FILL_OPACITY = 0 
 STROKE_OPACITY = 0.75
 LINE_WIDTH = 6
+COLOR_ONE = 'red'
+COLOR_TWO = 'tomato'
+COLOR_THREE = 'gold'
 
 f = Image.new(100,100) { self.background_color = "white" }
 canvas = Magick::ImageList.new
@@ -25,7 +32,6 @@ def draw_x(canvas, start_x, start_y, size, color_one, color_two)
   draw_line(start_x, start_y, start_x + size, start_y + size, color_one).draw(canvas)
   draw_line(start_x + size, start_y, start_x, start_y + size, color_two).draw(canvas)
 end
-
 
 draw_x(canvas, 0,0, 50, 'red', 'tomato')
 draw_x(canvas, 50,0, 50, 'tomato', 'gold')
