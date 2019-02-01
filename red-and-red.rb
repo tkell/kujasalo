@@ -7,12 +7,12 @@ include Magick
 
 # These constants will actually Do The Art
 FILL_OPACITY = 0 
-STROKE_OPACITY = 0.75
-LINE_WIDTH = 6
-COLOR_ONE = 'red'
-COLOR_TWO = 'tomato'
-COLOR_THREE = 'gold'
-COLOR_FOUR = 'dark red'
+STROKE_OPACITY = 0.66
+LINE_WIDTH = 5
+COLOR_ONE = '#fb9678'
+COLOR_TWO = '#fdd0c2'
+COLOR_THREE = '#fbd878'
+COLOR_FOUR = '#f95c2e'
 
 canvas = Magick::ImageList.new
 canvas.new_image(450, 1250) {self.background_color = "white"}
