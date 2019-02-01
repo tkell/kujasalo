@@ -28,21 +28,37 @@ def draw_line(start_x, start_y, end_x, end_y, color)
   return line
 end
 
+# So our subtraction is about 1/3 of LINE_WIDTH, and about 1/20 of the size of the X
 def draw_x(canvas, start_x, start_y, size, color_one, color_two)
-  draw_line(start_x, start_y, start_x + size, start_y + size, color_one).draw(canvas)
-  draw_line(start_x + size, start_y, start_x, start_y + size, color_two).draw(canvas)
+  draw_line(start_x + 2, start_y + 2, start_x + size - 2, start_y + size - 2, color_one).draw(canvas)
+  draw_line(start_x + size - 2, start_y + 2, start_x + 2, start_y + size - 2, color_two).draw(canvas)
 end
 
-draw_x(canvas, 0,0, 50, 'red', 'tomato')
-draw_x(canvas, 50,0, 50, 'tomato', 'gold')
-draw_x(canvas, 100,0, 50, 'red', 'tomato')
-draw_x(canvas, 150,0, 50, 'tomato', 'gold')
-draw_x(canvas, 200,0, 50, 'red', 'tomato')
+def draw_row_with_x(canvas, size, row)
+  if row % 2 == 0
+    line_array = [0, 1, 0, 1, 0]
+  else
+    line_array = [1, 0, 1, 0, 1]
+  end
 
-draw_x(canvas, 0,50, 50, 'tomato', 'gold')
-draw_x(canvas, 50,50, 50, 'red', 'tomato')
-draw_x(canvas, 100,50, 50, 'tomato', 'gold')
-draw_x(canvas, 150,50, 50, 'red', 'tomato')
-draw_x(canvas, 200,50, 50, 'red', 'tomato')
+  y_offset = size * row
+  line_array.each_with_index do |item, index|
+    x_offset = index * size
+    if item == 0
+      color_one = 'red'
+      color_two = 'tomato'
+    end
+    if item == 1
+      color_one = 'tomato'
+      color_two = 'gold'
+    end
+    draw_x(canvas, x_offset,y_offset, size, color_one, color_two)
+  end
+end
+
+
+for row in 0..4 do
+  draw_row_with_x(canvas, 50, row)
+end
 
 canvas.write("output/test.jpg")
