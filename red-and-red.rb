@@ -5,8 +5,6 @@ include Magick
 # 7 rows of transition 
 # 9 totally unchanging horizontal rows
 
-
-
 # These constants will actually Do The Art
 FILL_OPACITY = 0 
 STROKE_OPACITY = 0.75
