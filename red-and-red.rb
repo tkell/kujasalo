@@ -6,6 +6,7 @@ include Magick
 # 9 totally unchanging horizontal rows
 
 
+
 # These constants will actually Do The Art
 FILL_OPACITY = 0 
 STROKE_OPACITY = 0.75
@@ -13,7 +14,7 @@ LINE_WIDTH = 6
 COLOR_ONE = 'red'
 COLOR_TWO = 'tomato'
 COLOR_THREE = 'gold'
-COLOR_FOUR = 'dark red' # !!
+COLOR_FOUR = 'dark red'
 
 canvas = Magick::ImageList.new
 canvas.new_image(450, 1250) {self.background_color = "white"}
@@ -28,7 +29,7 @@ def draw_line(start_x, start_y, end_x, end_y, color)
   return line
 end
 
-# So our subtraction is about 1/3 of LINE_WIDTH, and about 1/20 of the size of the X
+# So our subtraction is about 1/3 of LINE_WIDTH, and about 1/20 of the size
 def draw_x(canvas, start_x, start_y, size, color_one, color_two)
   draw_line(start_x + 2, start_y + 2, start_x + size - 2, start_y + size - 2, color_one).draw(canvas)
   draw_line(start_x + size - 2, start_y + 2, start_x + 2, start_y + size - 2, color_two).draw(canvas)
@@ -63,8 +64,8 @@ def draw_x_with_clockwise_rotation(canvas, start_x, start_y, size, color_one, co
 end
 
 def draw_cross(canvas, start_x, start_y, size, color_one, color_two)
-  draw_line(start_x, start_y + (size / 2), start_x + size, start_y + (size / 2), color_one).draw(canvas)
   draw_line(start_x + (size / 2), start_y, start_x + (size / 2), start_y + size, color_two).draw(canvas)
+  draw_line(start_x, start_y + (size / 2), start_x + size, start_y + (size / 2), color_one).draw(canvas)
 end
 
 def draw_row_with_x(canvas, size, row, row_offset)
@@ -78,12 +79,12 @@ def draw_row_with_x(canvas, size, row, row_offset)
   line_array.each_with_index do |item, index|
     x_offset = index * size
     if item == 0
-      color_one = 'red'
-      color_two = 'tomato'
+      color_one = COLOR_ONE
+      color_two = COLOR_TWO
     end
     if item == 1
-      color_one = 'tomato'
-      color_two = 'gold'
+      color_one = COLOR_THREE
+      color_two = COLOR_FOUR
     end
     draw_x(canvas, x_offset,y_offset, size, color_one, color_two)
   end
@@ -100,13 +101,13 @@ def draw_row_with_rotation(canvas, size, row, row_offset, rotation_offset)
   line_array.each_with_index do |item, index|
     x_offset = index * size
     if item == 0
-      color_one = 'red'
-      color_two = 'tomato'
+      color_one = COLOR_ONE
+      color_two = COLOR_TWO
       draw_x_with_counterclockwise_rotation(canvas, x_offset,y_offset, 50, color_one, color_two, rotation_offset)
     end
     if item == 1
-      color_one = 'tomato'
-      color_two = 'gold'
+      color_one = COLOR_THREE
+      color_two = COLOR_FOUR
       draw_x_with_clockwise_rotation(canvas, x_offset,y_offset, 50, color_one, color_two, rotation_offset)
     end
   end
@@ -124,12 +125,12 @@ def draw_row_with_cross(canvas, size, row, row_offset)
   line_array.each_with_index do |item, index|
     x_offset = index * size
     if item == 0
-      color_one = 'red'
-      color_two = 'tomato'
+      color_one = COLOR_ONE
+      color_two = COLOR_TWO
     end
     if item == 1
-      color_one = 'tomato'
-      color_two = 'gold'
+      color_one = COLOR_FOUR
+      color_two = COLOR_THREE
     end
     draw_cross(canvas, x_offset,y_offset, size, color_one, color_two)
   end
@@ -138,7 +139,6 @@ end
 
 
 ## do it!
-
 for row in 0..8 do
   draw_row_with_x(canvas, 50, row, 0)
 end
@@ -150,7 +150,6 @@ draw_row_with_rotation(canvas, 50, 12, 0, 12.5)
 draw_row_with_rotation(canvas, 50, 13, 0, 15.625)
 draw_row_with_rotation(canvas, 50, 14, 0, 18.75)
 draw_row_with_rotation(canvas, 50, 15, 0, 21.875)
-
 
 for row in 0..8 do
   draw_row_with_cross(canvas, 50, row, 16)
