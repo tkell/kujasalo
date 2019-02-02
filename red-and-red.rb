@@ -9,10 +9,10 @@ include Magick
 FILL_OPACITY = 0 
 STROKE_OPACITY = 0.66
 LINE_WIDTH = 5
-COLOR_ONE = '#fb9678'
-COLOR_TWO = '#fdd0c2'
-COLOR_THREE = '#fbd878'
-COLOR_FOUR = '#f95c2e'
+COLOR_ONE = '#fb5b05'
+COLOR_TWO = '#fc7c37'
+COLOR_THREE = '#FD2A4A'
+COLOR_FOUR = '#ffcc66' 
 
 canvas = Magick::ImageList.new
 canvas.new_image(450, 1250) {self.background_color = "white"}
